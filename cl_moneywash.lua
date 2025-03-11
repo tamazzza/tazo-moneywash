@@ -47,7 +47,7 @@ local function spawnPed(point)
                     icon = 'fa-solid fa-sack-dollar',
                     label = 'Exchange',
                     action = function()
-                        local success = lib.callback.await('randol_moneywash:server:checkBills', false)
+                        local success = lib.callback.await('tazo-moneywash:server:checkBills', false)
                         if not success then
                             DoNotification("You don't have any dirty money.", "error")
                         end
@@ -80,7 +80,7 @@ local function createPoints()
     end
 end
 
-RegisterNetEvent('randol_moneywash:client:exchangeBills', function()
+RegisterNetEvent('tazo-moneywash:client:exchangeBills', function()
     if GetInvokingResource() then return end
     TaskStartScenarioInPlace(cache.ped, "WORLD_HUMAN_WINDOW_SHOP_BROWSE", 0, true)
     if lib.progressCircle({
@@ -92,11 +92,11 @@ RegisterNetEvent('randol_moneywash:client:exchangeBills', function()
         disable = { move = true, car = true, mouse = false, combat = true, },
     }) then
         ClearPedTasksImmediately(cache.ped)
-        lib.callback.await('randol_moneywash:server:returnCleanCash', false)
+        lib.callback.await('tazo-moneywash:server:returnCleanCash', false)
     end
 end)
 
-RegisterNetEvent('randol_moneywash:client:cacheConfig', function(data)
+RegisterNetEvent('tazo-moneywash:client:cacheConfig', function(data)
     if GetInvokingResource() or not hasPlyLoaded() then return end
     Config = data
     createPoints()

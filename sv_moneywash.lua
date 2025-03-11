@@ -25,7 +25,7 @@ local function isNearLocation(pos)
     return false
 end
 
-lib.callback.register('randol_moneywash:server:checkBills', function(source)
+lib.callback.register('tazo-moneywash:server:checkBills', function(source)
     local src = source
     local Player = GetPlayer(src)
     local pos = GetEntityCoords(GetPlayerPed(src))
@@ -37,7 +37,7 @@ lib.callback.register('randol_moneywash:server:checkBills', function(source)
 
     if totalWorth > 0 then
         storedWorth[src] = totalWorth
-        TriggerClientEvent('randol_moneywash:client:exchangeBills', src)
+        TriggerClientEvent('tazo-moneywash:client:exchangeBills', src)
         DoNotification(src, ('Please wait. Exchanging $%s dirty money for clean cash.'):format(totalWorth))
         return true
     end
@@ -45,7 +45,7 @@ lib.callback.register('randol_moneywash:server:checkBills', function(source)
     return false
 end)
 
-lib.callback.register('randol_moneywash:server:returnCleanCash', function(source)
+lib.callback.register('tazo-moneywash:server:returnCleanCash', function(source)
     local src = source
     local Player = GetPlayer(src)
     local totalWorth = storedWorth[src]
@@ -68,13 +68,13 @@ end)
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
     SetTimeout(2000, function()
-        TriggerClientEvent('randol_moneywash:client:cacheConfig', -1, Server)
+        TriggerClientEvent('tazo-moneywash:client:cacheConfig', -1, Server)
     end)
 end)
 
 function PlayerHasLoaded(source)
     local src = source
     SetTimeout(2000, function()
-        TriggerClientEvent('randol_moneywash:client:cacheConfig', src, Server)
+        TriggerClientEvent('tazo-moneywash:client:cacheConfig', src, Server)
     end)
 end
