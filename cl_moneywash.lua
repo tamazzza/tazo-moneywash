@@ -87,8 +87,8 @@ RegisterNetEvent('tazo-moneywash:client:exchangeBills', function()
         duration = 10000,
         position = 'bottom',
         label = 'Exchanging marked bills..',
-        useWhileDead = true,
-        canCancel = false,
+        useWhileDead = false,
+        canCancel = true,
         disable = { move = true, car = true, mouse = false, combat = true, },
     }) then
         ClearPedTasksImmediately(cache.ped)
